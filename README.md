@@ -1,6 +1,6 @@
-This project is not setup for deployment, only runs locall in dev mode.
+This project is not setup for deployment. It only runs local in dev mode.
 
-It's for checking out PostHog.com
+It's simply for checking out PostHog.com and was built following this guide: https://posthog.com/tutorials/nextjs-cookie-banner
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 

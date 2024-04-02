@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from "react";
+import { usePostHog } from "posthog-js/react";
 
 export function cookieConsentGiven() {
   if (!localStorage.getItem('cookie_consent')) {
@@ -10,12 +11,19 @@ export function cookieConsentGiven() {
 
 export default function Banner() {
   const [consentGiven, setConsentGiven] = useState('');
+  const posthog = usePostHog();
 
   useEffect(() => {
     // We want this to only run once the client loads
     // or else it causes a hydration error
     setConsentGiven(cookieConsentGiven());
   }, []);
+
+  useEffect(() => {
+    if (consentGiven !== '') {
+      posthog.set_config({ persistence: consentGiven === 'yes' ? 'localStorage+cookie' : 'memory' });
+    }
+  }, [consentGiven]);
 
   const handleAcceptCookies = () => {
     localStorage.setItem('cookie_consent', 'yes');
